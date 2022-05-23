@@ -1,0 +1,14 @@
+*{
+    font-family: "padauk";
+}
+.header-text{
+    line-height: 40px;
+}
+.para{
+    text-align: justify;
+    line-height: 30px;
+}
+a{
+    text-decoration: none;
+    color: gray;
+}
