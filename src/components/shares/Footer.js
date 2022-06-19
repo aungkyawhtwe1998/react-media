@@ -6,24 +6,24 @@ export default function Footer() {
             <div className="container py-5">
                 <div className="row">
                     <div className="col-md-4">
-                        <ul class="list-group">
-                            <li class="list-group-item border-info bg-dark">
+                        <ul className="list-group">
+                            <li className="list-group-item border-info bg-dark">
                                 <i className='fa text-success pe-2 fa-user'></i>
                                 <a href='#' >About Us</a>
                             </li>
-                            <li class="list-group-item border-info bg-dark">
+                            <li className="list-group-item border-info bg-dark">
                                 <i className='fa text-success pe-2 fa-envelope'></i>
                                 <a href='#' >mmev@gmail.com</a>
                             </li>
-                            <li class="list-group-item border-info bg-dark">
+                            <li className="list-group-item border-info bg-dark">
                                 <i className='fa fa-brands text-success pe-2 fa-google'></i>
                                 <a href='#' >mmev@gmail.com</a>
                             </li>
-                            <li class="list-group-item border-info bg-dark">
+                            <li className="list-group-item border-info bg-dark">
                                 <i className='fa fa-brands text-success pe-2 fa-facebook'></i>
                                 <a href='#' >mmev@gmail.com</a>
                             </li>
-                            <li class="list-group-item border-info bg-dark">
+                            <li className="list-group-item border-info bg-dark">
                                 <i className='fa fa-brands text-success pe-2 fa-youtube'></i>
                                 <a href='#' >mmev@gmail.com</a>
                             </li>
@@ -39,23 +39,21 @@ export default function Footer() {
                     <div className='col-md-4'>
                         <h3 className='text-center text-white'>Contact Us</h3>
                         <form>
-                        <div className='d-flex'>
-                        <div class="form-floating mb-2 bg-dark me-1">
-                                <input type="text" class="form-control form-control-sm bg-dark text-white" id="floatingName" placeholder="Name" />
-                                <label for="floatingName" className='text-white'>Name</label>
-                            </div>
-                            <div class="form-floating mb-2 bg-dark">
-                                <input type="email" class="form-control form-control-sm bg-dark text-white" id="floatingInput" placeholder="name@example.com" />
-                                <label for="floatingInput" className='text-white'>Email address</label>
-                            </div>
+                        <div className="form-floating mb-2 bg-dark me-1">
+                            <input type="text" className="form-control form-control-sm bg-dark text-white" id="floatingName" placeholder="Name" />
+                            <label htmlFor="floatingName" className='text-white'>Name</label>
                         </div>
-                            
-                            <div className="form-floating mb-3 bg-dark">
-                                <textarea className="form-control form-control-sm bg-dark" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
-                                <label for="floatingTextarea2" className='text-white'>Comments</label>
+                        <div className="form-floating mb-2 bg-dark">
+                            <input type="email" className="form-control form-control-sm bg-dark text-white" id="floatingInput" placeholder="name@example.com" />
+                            <label htmlFor="floatingInput" className='text-white'>Email address</label>
                             </div>
-                            <button type="submit" className="float-end btn btn-primary btn-sm">Submit</button>
-                        </form>
+                            
+                        <div className="form-floating mb-3 bg-dark">
+                            <textarea className="form-control form-control-sm bg-dark" placeholder="Leave a comment here" id="floatingTextarea2"></textarea>
+                            <label htmlFor="floatingTextarea2" className='text-white'>Comments</label>
+                        </div>
+                        <button type="submit" className="float-end btn btn-primary btn-sm">Submit</button>
+                    </form>
                     </div>
                 </div>
             </div>
