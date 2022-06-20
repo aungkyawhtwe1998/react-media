@@ -3,7 +3,7 @@ import React from 'react';
 export default function HotNew({ post }) {
     return (
         <div className="col-md-6 col-lg-6 mt-3">
-            <div className='card mb-2'>
+            <div className='card mb-2 border-0'>
                 <div className='card-body'>
                     <div className='row'>
                         <div className='col-6'>

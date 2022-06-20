@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Loading from './shares/Loading';
 import { addUser,removeUser } from '../redux/actions';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { postData } from '../utils/Api';
 export default function Login() {
     const [isCheck, setIsCheck] = useState(false);
     const [phone, setPhone] = useState('');
@@ -18,13 +18,8 @@ export default function Login() {
     const dispatch = useDispatch();
 
     const apiLogin = async user => {
-        const response = await fetch("http://13.214.58.126:3001/users", {
-            method:'POST',
-            body:JSON.stringify(user),
-            headers:{"content-type":"application/json"}
-        });
-        const resData = await response.json();
-         console.log(resData);
+        const resData = await postData("/users",{phone,password},"");
+         console.log("User Data",phone, password);
         if(resData.con){
             setIsLoading(false);
             if(isCheck){

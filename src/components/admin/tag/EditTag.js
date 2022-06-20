@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getData, patchData } from '../../../utils/Api';
 import Loading from '../../shares/Loading';
 
 const EditTag = () => {
@@ -14,15 +15,7 @@ const EditTag = () => {
 
   const apiCategoryUpdate = async()=> {
   
-    const response = await fetch(`http://13.214.58.126:3001/tags/${id}`,{
-      method:"PATCH",
-      body:JSON.stringify({name:name}),
-      headers: {
-        'content-type':'application/json',
-        authorization: `Bearer ${userData.token}`
-      }
-    });
-    const resData = await response.json();
+    const resData = await patchData(`/tags/${id}`,{name:name},userData.token);
     console.log(resData);
     if(resData.con){
       navigate('/admin/tags/all')
@@ -34,8 +27,7 @@ const EditTag = () => {
   }
 
   const loadCategory = async() => {
-    const response = await fetch(`http://13.214.58.126:3001/tags/${id}`);
-    const resData = await response.json();
+    const resData = await getData(`/tags/${id}`);
     setName(resData.result.name);
     setIsLoading(false);
   }

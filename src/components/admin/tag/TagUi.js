@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { getImage } from '../../../utils/Api'
 
 const TagUi = ({tag, apiTagDelete}) => {
     
@@ -13,7 +14,7 @@ const TagUi = ({tag, apiTagDelete}) => {
                 </div>
                 <div className='col-md-6'>
                 <h5>{tag.name}</h5>
-                <Link to={`/admin/tags/edit/${tag._id}`} className='btn btn-warning btn-sm'>
+                <Link to={getImage(tag._id)} className='btn btn-warning btn-sm'>
                     <i className='fa fa-edit'></i>
                 </Link>
                 <button className='btn btn-danger btn-sm ms-2' onClick={()=>apiTagDelete(tag._id)}>

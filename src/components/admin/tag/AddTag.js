@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { formPost } from '../../../utils/Api';
 import Loading from '../../shares/Loading';
 const AddTag = () => {
   const [name,setName] = useState('');
@@ -19,17 +20,9 @@ const AddTag = () => {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('file',file);
-    const response = await fetch("http://13.214.58.126:3001/tags",{
-      method:"POST",
-      body:formData,
-      headers: {
-        authorization: `Bearer ${userData.token}`
-      }
-    });
-    const resData = await response.json();
+    const resData = await formPost("/tags",formData,userData.token)
     console.log(resData);
     if(resData.con){
-
       navigate('/admin/tags/all')
     }else{
       console.log(resData)

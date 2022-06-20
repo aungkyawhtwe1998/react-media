@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
+import { deleteData, getData } from '../../../utils/Api';
 import PostUi from './PostUi';
 
 const AllPost = () => {
@@ -10,19 +11,12 @@ const AllPost = () => {
     const userData = useSelector(state => state.userData);
 
     const loadPosts = async () => {
-        const response = await fetch(`http://13.214.58.126:3001/posts/paginate/${page}`);
-        const resData = await response.json();
+        const resData = await getData(`/posts/paginate/${page}`);
         setPosts(resData.result);
     }
 
     const apiPostDelete = async (id) => {
-        const response = await fetch(`http://13.214.58.126:3001/posts/${id}`, {
-            method: "DELETE",
-            headers: {
-                'content-type': 'application/json',
-                authorization: `Bearer ${userData.token}`
-            }
-        });
+        const response = await deleteData(`/posts/${id}`, userData.token);
         const resData = await response.json();
         console.log(resData);
         loadPosts();
@@ -42,7 +36,6 @@ const AllPost = () => {
             <div>
                 <div className='d-flex justify-content-between align-item-center p-1'>
                     <Link to="/admin/posts/add" className="btn btn-sm btn-primary btn mb-3">Add</Link>
-                    <span>Pagination {page}</span>
                     <nav aria-label="Page navigation example">
                         <ul className="pagination pagination-sm">
                         <button className='page-link page-item' onClick={decreasePage}>Previous</button>

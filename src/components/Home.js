@@ -14,7 +14,7 @@ import SideNew from './shares/SideNew';
 import videoMp4 from '../statics/video.mp4';
 import SideVideoNew from './shares/SideVideoNew';
 import banner1 from '../statics/bm/banner1.jpeg';
-
+import {getData} from '../utils/Api';
 export default function Home() {
   const [hotnews, setHotNews] = useState([]);
   const [localNews, setLocalNews] = useState([]);
@@ -23,10 +23,9 @@ export default function Home() {
 
 
   const loadEVNews = async () => {
-    const response = await fetch('http://13.214.58.126:3001/posts/bytag/62aef0d902e3e94e7b306fc6');
-    const resData = await response.json();
+    const data = await getData('/posts/bytag/62aef0d902e3e94e7b306fc6');
    // console.log('hot news', resData)
-    setEvNews(resData.result.splice(0, 6));
+    setEvNews(data.result.splice(0, 6));
   }
   const loadTourismNews = async () => {
     const response = await fetch('http://13.214.58.126:3001/posts/bytag/62aef20502e3e94e7b30705b');

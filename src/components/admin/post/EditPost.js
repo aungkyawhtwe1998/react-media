@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import { getData, patchData } from '../../../utils/Api';
 import Loading from '../../shares/Loading';
 
 const EditPost = () => {
@@ -16,8 +17,7 @@ const EditPost = () => {
     const {id} = useParams();
 
     const loadSingleCat = async()=>{
-      const response = await fetch(`http://13.214.58.126:3001/posts/${id}`);
-      const resData = await response.json();
+      const resData = await getData(`/posts/${id}`);
       console.log('result', resData.result);
       const curPost = resData.result;
       setTitle(curPost.title);
@@ -28,8 +28,7 @@ const EditPost = () => {
     }
 
     const loadCats = async ()=>{
-        const response = await fetch('http://13.214.58.126:3001/cats');
-        const resData = await response.json();
+        const resData = await getData('/cats');
         if(resData.con){
             setCats(resData.result);
 
@@ -38,8 +37,7 @@ const EditPost = () => {
         }
     }
     const loadTags = async ()=>{
-        const response = await fetch('http://13.214.58.126:3001/tags');
-        const resData = await response.json();
+        const resData = await getData('/tags');
         if(resData.con){
             setTags(resData.result);
         
@@ -53,15 +51,7 @@ const EditPost = () => {
     const apiUpdatePost = async()=>{
       const updateData = {title, cat, tag, content};
       console.log(updateData);
-      const response = await fetch(`http://13.214.58.126:3001/posts/${id}`,{
-          method:"PATCH",
-          body:JSON.stringify(updateData),
-          headers:{
-              'content-type':'application/json',
-              'authorization':`Barer ${userData.token}`
-          }
-      });
-      const resData = await response.json();
+      const resData = await patchData(`/posts/${id}`, updateData,userData.token);
       if(resData.con){
         navigate('/admin/posts/all');
       }else{
@@ -91,19 +81,19 @@ const EditPost = () => {
                     
                 <div className='col-md-6 mb-3'>
                         <label htmlFor='tag' className='form-label text-white'>Category</label>
-                        <select className='form-select' id='tag' onChange={e => setTag(e.target.value)}>
-                            {cats.length > 0 && cats.map(caty => <option key={caty._id} value={caty._id} selected={caty._id === cat._id}>{caty.name}</option>)}
+                        <select className='form-select' id='tag' onChange={e => setTag(e.target.value)} >
+                        {cats.length > 0 && cats.map(caty => <option key={caty._id} value={caty._id} >{caty.name}</option>)}
                         </select>
                     </div>
                     <div className='col-md-6 mb-3'>
                         <label htmlFor='category' className='form-label text-white'>Tag</label>
-                        <select className='form-select' id='category' onChange={e => setCat(e.target.value)}>
-                        {tags.length > 0 && tags.map(tagy => <option key={tagy._id} value={tagy._id} selected={tagy._id === tag._id}>{tagy.name}</option>)}
+                        <select className='form-select' id='category' onChange={e => setCat(e.target.value)} >
+                        {tags.length > 0 && tags.map(tagy => <option key={tagy._id} value={tagy._id} >{tagy.name}</option>)}
                         </select>
                     </div>
                     <div className='mb-3'>
                     <label htmlFor='content' className='form-label text-white'>Content</label>
-                    <textarea className='form-control' defaultValue={content} id='content' onChange={e=>setContent(e.target.value)} row-3></textarea>
+                    <textarea className='form-control' rows="3" defaultValue={content} id='content' onChange={e=>setContent(e.target.value)} ></textarea>
                     
                     </div>
                     <div className='mb-3 d-flex justify-content-end'>

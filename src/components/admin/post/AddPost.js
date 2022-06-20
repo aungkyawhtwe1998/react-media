@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { formPost, getData } from '../../../utils/Api';
 import Loading from '../../shares/Loading';
 
 const AddPost = () => {
@@ -16,8 +17,7 @@ const AddPost = () => {
     const navigate = useNavigate();
 
     const loadCats = async ()=>{
-        const response = await fetch('http://13.214.58.126:3001/cats');
-        const resData = await response.json();
+        const resData = await getData('/cats');
         if(resData.con){
             setCats(resData.result);
             setCat(resData.result[0]._id);
@@ -27,8 +27,7 @@ const AddPost = () => {
         }
     }
     const loadTags = async ()=>{
-        const response = await fetch('http://13.214.58.126:3001/tags');
-        const resData = await response.json();
+        const resData = await getData('/tags');
         if(resData.con){
             setTags(resData.result);
             setTag(resData.result[0]._id)
@@ -47,14 +46,7 @@ const AddPost = () => {
         formData.append('content', content);
         formData.append('file',file);
         console.log(formData)
-        const response = await fetch("http://13.214.58.126:3001/posts",{
-            method:"POST",
-            body:formData,
-            headers:{
-                authorization:`Barer ${userData.token}`
-            }
-        });
-        const resData = await response.json();
+        const resData = await formPost("/posts",formData,userData.token);
         console.log(resData)
         if(resData.con){
             navigate('/admin/posts/all');
